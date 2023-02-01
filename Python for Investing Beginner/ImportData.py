@@ -4,7 +4,7 @@ import sys
 import pandas as pd
 import yfinance as yf
 import datetime
-
+import os
 
 ################################################################
 # run with args pythonfile -func parameter
@@ -20,10 +20,22 @@ def ImportDataFromYahoo(symbol):
     data = pdr.get_data_yahoo(f"{symbol}=x", start='2019-01-01', end= datetime.datetime.now())
     print(data)
 
+def ImportFile(filename):
+    path = f"{os.getcwd()}/data/"
+    data = ""
+    if filename.endswith(".csv"):
+        data = pd.read_csv(f"{path}{filename}")
+    elif filename.endswith(".xlsx") or filename.endswith(".xls"):
+        data = pd.read_csv(f"{path}{filename}")
+    else:
+        print(f"can't import this file ({filename})")
+    print(data)
 
 if __name__ == '__main__':
     if sys.argv[1] == '-y':
         ImportDataFromYahoo(sys.argv[2])
+    elif sys.argv[1] == '-i':
+        ImportFile((sys.argv[2]))
 
 
 
