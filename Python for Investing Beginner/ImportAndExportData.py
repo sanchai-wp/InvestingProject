@@ -8,17 +8,17 @@ import os
 
 ################################################################
 # run with args pythonfile -func parameter
-# fucn -y use to import data from yahoo Finance, parameter is symbol, start date and end date : python ImportAndExportData.py -y EURUSD 2016-01-01 2022-12-31
+# fucn -y use to import data from yahoo Finance, parameter is type, symbol, start date and end date : python ImportAndExportData.py -y forex EURUSD 2016-01-01 2022-12-31
 # func -i import data from .excel/.csv, parameter is file name : python ImportAndExportData.py -i tesla.csv
 # fucn -e export data to excel, parameter is extension and symbol : python ImportAndExportData.py -e .csv EURUSD
 ################################################################
 
 
-def ImportDataFromYahoo(symbol, startdate, enddate):
+def ImportDataFromYahoo(type, symbol, startdate, enddate):
     yf.pdr_override()
-    data = pdr.get_data_yahoo(f"{symbol}=x", start= startdate, end= enddate)
-    print(data)
-    return data
+    if type == 'forex':
+        symbol = symbol + "=x"
+    return pdr.get_data_yahoo(f"{symbol}", start= startdate, end= enddate)
 
 def ImportFile(filename):
     path = f"{os.getcwd()}/data/"
@@ -41,7 +41,7 @@ def ExportFile(extension, symbol):
 
 if __name__ == '__main__':
     if sys.argv[1] == '-y':
-        ImportDataFromYahoo(sys.argv[2], sys.argv[3], sys.argv[4])
+        ImportDataFromYahoo(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     elif sys.argv[1] == '-i':
         ImportFile(sys.argv[2])
     elif sys.argv[1] == '-e':
