@@ -8,15 +8,15 @@ import os
 
 ################################################################
 # run with args pythonfile -func parameter
-# fucn -y use to import data from yahoo Finance, parameter is symbol : python ImportData.py -y EURUSD
+# fucn -y use to import data from yahoo Finance, parameter is symbol, start date and end date : python ImportData.py -y EURUSD 2016-01-01 2022-12-31
 # func -i import data from .excel/.csv, parameter is file name : python ImportData.py -i tesla.csv
 # fucn -e export data to excel, parameter is extension and symbol : python ImportData.py -e .csv EURUSD
 ################################################################
 
 
-def ImportDataFromYahoo(symbol):
+def ImportDataFromYahoo(symbol, startdate, enddate):
     yf.pdr_override()
-    data = pdr.get_data_yahoo(f"{symbol}=x", start='2019-01-01', end= datetime.datetime.now())
+    data = pdr.get_data_yahoo(f"{symbol}=x", start= startdate, end= enddate)
     print(data)
     return data
 
@@ -41,7 +41,7 @@ def ExportFile(extension, symbol):
 
 if __name__ == '__main__':
     if sys.argv[1] == '-y':
-        ImportDataFromYahoo(sys.argv[2])
+        ImportDataFromYahoo(sys.argv[2], sys.argv[3], sys.argv[4])
     elif sys.argv[1] == '-i':
         ImportFile(sys.argv[2])
     elif sys.argv[1] == '-e':
