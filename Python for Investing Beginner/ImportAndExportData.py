@@ -8,9 +8,9 @@ import os
 
 ################################################################
 # run with args pythonfile -func parameter
-# fucn -y use to import data from yahoo Finance, parameter is symbol, start date and end date : python ImportData.py -y EURUSD 2016-01-01 2022-12-31
-# func -i import data from .excel/.csv, parameter is file name : python ImportData.py -i tesla.csv
-# fucn -e export data to excel, parameter is extension and symbol : python ImportData.py -e .csv EURUSD
+# fucn -y use to import data from yahoo Finance, parameter is symbol, start date and end date : python ImportAndExportData.py -y EURUSD 2016-01-01 2022-12-31
+# func -i import data from .excel/.csv, parameter is file name : python ImportAndExportData.py -i tesla.csv
+# fucn -e export data to excel, parameter is extension and symbol : python ImportAndExportData.py -e .csv EURUSD
 ################################################################
 
 
